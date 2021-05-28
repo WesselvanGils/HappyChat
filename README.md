@@ -8,6 +8,6 @@ A repository to develop a chat function for the Happy Singles project
 4. Open a new tab in the terminal
 5. Run a Peer server on port 3001 with peerjs --port 3001
 
-Authors:
+# Authors
     - Wessel van Gils
     - Boris Pouw 
