@@ -4,7 +4,7 @@ const myVideo = document.createElement("video")
 const myPeer = new Peer(undefined,
     {
         host: "/",
-        port: "3001"
+        port: process.env.PORT || 3000
     }
 )
 
