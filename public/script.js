@@ -8,6 +8,7 @@ const myPeer = new Peer(undefined,
     }
 )
 
+const peers = {}
 myVideo.muted = true
 
 navigator.mediaDevices.getUserMedia(
