@@ -17,6 +17,7 @@ navigator.mediaDevices.getUserMedia(
     }
 ).then(stream =>
     {
+        console.log("video stream added")
         addVideoStream(myVideo, stream)
     }
 )
@@ -34,7 +35,7 @@ socket.on("user-connected", userId =>
 function addVideoStream(video, stream)
 {
     video.srcObject = stream
-    video.eventListener("loadedmetadata", () =>
+    video.addEventListener("loadedmetadata", () =>
     {
         video.play()
     })
