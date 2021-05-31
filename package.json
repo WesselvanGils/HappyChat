@@ -1,20 +1,15 @@
 {
-  "name": "happychat",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "name": "webrtc-demo",
+  "version": "0.0.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/TheElementalDragon/HappyChat.git"
+  "devDependencies": {
+    "vite": "^2.0.5"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/TheElementalDragon/HappyChat/issues"
-  },
-  "homepage": "https://github.com/TheElementalDragon/HappyChat#readme"
+  "dependencies": {
+    "firebase": "^8.2.10"
+  }
 }
