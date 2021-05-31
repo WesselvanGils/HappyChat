@@ -39,7 +39,7 @@ navigator.mediaDevices.getUserMedia(
 	})
 
 	let text = $("input");
-	
+
 	$('html').keydown(function (e)
 	{
 		if (e.which == 13 && text.val().length !== 0)
@@ -48,6 +48,7 @@ navigator.mediaDevices.getUserMedia(
 			text.val('')
 		}
 	});
+
 	socket.on("createMessage", message =>
 	{
 		$("ul").append(`<li class="message"><b>user</b><br/>${message}</li>`);
@@ -69,6 +70,7 @@ function connectToNewUser(userId, stream)
 {
 	const call = myPeer.call(userId, stream)
 	const video = document.createElement('video')
+	
 	call.on('stream', userVideoStream =>
 	{
 		addVideoStream(video, userVideoStream)
