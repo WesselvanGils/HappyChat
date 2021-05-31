@@ -1,10 +1,9 @@
 {
-  "name": "HappyChat",
+  "name": "happychat",
   "version": "1.0.0",
-  "description": "A repository to develop a chat function for the Happy Singles project",
+  "description": "",
   "main": "server.js",
   "scripts": {
-    "devStart": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,13 +16,5 @@
   "bugs": {
     "url": "https://github.com/TheElementalDragon/HappyChat/issues"
   },
-  "homepage": "https://github.com/TheElementalDragon/HappyChat#readme",
-  "dependencies": {
-    "ejs": "^3.1.6",
-    "express": "^4.17.1",
-    "peer": "^0.6.1",
-    "socket.io": "^4.1.2",
-    "uuid": "^8.3.2"
-  },
-  "devDependencies": {}
+  "homepage": "https://github.com/TheElementalDragon/HappyChat#readme"
 }
