@@ -1,6 +1,6 @@
 # HappyChat
-A repository to develop a chat function for the Happy Singles project
+A repository to develop the speeddating tool used by [Happy Singles](https://github.com/Perunaz/HappySingles)
 
-# Authors
+## Authors
     - Wessel van Gils
     - Boris Pouw 
