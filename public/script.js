@@ -12,13 +12,17 @@ const myVideo = document.createElement('video')
 myVideo.muted = true;
 
 const peers = {}
-navigator.mediaDevices.getUserMedia({
+
+navigator.mediaDevices.getUserMedia(
+{
 	video: true,
 	audio: true
-}).then(stream =>
+}
+).then(stream =>
 {
 	myVideoStream = stream;
 	addVideoStream(myVideo, stream)
+
 	myPeer.on('call', call =>
 	{
 		call.answer(stream)
@@ -33,9 +37,9 @@ navigator.mediaDevices.getUserMedia({
 	{
 		connectToNewUser(userId, stream)
 	})
-	// input value
+
 	let text = $("input");
-	// when press enter send message
+	
 	$('html').keydown(function (e)
 	{
 		if (e.which == 13 && text.val().length !== 0)
