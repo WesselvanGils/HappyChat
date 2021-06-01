@@ -14,24 +14,29 @@ app.use(express.static("public"));
 
 app.use(morgan("tiny"));
 
-app.get("/", (req, res) => {
-  res.redirect(`/${uuidV4()}`);
+app.get("/", (req, res) =>
+{
+	res.redirect(`/${uuidV4()}`);
 });
 
-app.get("/:room", (req, res) => {
-  res.render("room", { roomId: req.params.room });
-  res.status(200);
+app.get("/:room", (req, res) =>
+{
+	res.render("room", { roomId: req.params.room });
+	res.status(200);
 });
 
-io.on("connection", (socket) => {
-  socket.on("join-room", (roomId, { id, name = uuidV4() }) => {
-    socket.join(roomId);
-    socket.to(roomId).broadcast.emit("user-connected", { id, name });
+io.on("connection", (socket) =>
+{
+	socket.on("join-room", (roomId, { id, name = uuidV4() }) =>
+	{
+		socket.join(roomId);
+		socket.to(roomId).broadcast.emit("user-connected", { id, name });
 
-    socket.on("disconnect", () => {
-      socket.to(roomId).broadcast.emit("user-disconnected", { id, name });
-    });
-  });
+		socket.on("disconnect", () =>
+		{
+			socket.to(roomId).broadcast.emit("user-disconnected", { id, name });
+		});
+	});
 });
 
 server.listen(port, () => console.log(`Server up and listening to ${port}`));
