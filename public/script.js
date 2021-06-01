@@ -1,9 +1,9 @@
 const socket = io('/')
-const videoGrid = document.getElementById('video-grid')
+let videoGrid = document.getElementById('video-grid')
 const myPeer = new Peer(undefined, {
 	path: '/peerjs',
 	host: '/',
-	port: '443'
+	port: '3031'
 })
 
 let myVideoStream;
@@ -35,10 +35,7 @@ navigator.mediaDevices.getUserMedia(
 
 	socket.on('user-connected', userId =>
 	{
-		setTimeout(() =>
-		{
-			connectToNewUser(userId, stream)
-		}, 3000)
+		connectToNewUser(userId, stream)
 	})
 
 	let text = $("input");
@@ -57,7 +54,10 @@ navigator.mediaDevices.getUserMedia(
 		$("ul").append(`<li class="message"><b>user</b><br/>${message}</li>`);
 		scrollToBottom()
 	})
-})
+}).catch (error)
+{
+	console.log(error)
+}
 
 socket.on('user-disconnected', userId =>
 {
@@ -94,6 +94,9 @@ function addVideoStream(video, stream)
 		video.play()
 	})
 	videoGrid.append(video)
+
+	let gridContent = videoGrid
+	videoGrid = gridContent
 }
 
 const scrollToBottom = () =>
