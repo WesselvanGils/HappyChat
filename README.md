@@ -8,11 +8,9 @@ A speeddating tool used by [Happy Singles](https://github.com/Perunaz/HappySingl
 
 ## Usage
 
-Go to the production server [here](https://happy-chat-avans.herokuapp.com/).
-
-Enter your name and a room is generated instantly.
-
-Copy and share the complete url to invite other people in the room.
+1. Go to the production server [here](https://happy-chat-avans.herokuapp.com/).
+2. Enter your name and a room is generated instantly.
+3. Copy and share the complete url to invite other people in the room.
 
 ## How to install
 
