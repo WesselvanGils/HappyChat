@@ -1,15 +1,27 @@
-# [Video Chat Room](https://spanion-video-chat.herokuapp.com/)
+# [Speeddating Tool](https://happy-chat-avans.herokuapp.com/)
 
-A fun open, private, and multiple user chat room inspired by zoom using WebRTC.
+A speeddating tool inspired by Zoom
 
 ## About
 
-A simple project built in few hours using [express](https://expressjs.com/), [socket.io](https://socket.io/) and [peerjs](https://peerjs.com/).
+A speeddating tool used by [Happy Singles](https://github.com/Perunaz/HappySingles)
 
 ## Usage
 
-Go to the production server [here](https://spanion-video-chat.herokuapp.com/).
+Go to the production server [here](https://happy-chat-avans.herokuapp.com/).
 
 Enter your name and a room is generated instantly.
 
 Copy and share the complete url to invite other people in the room.
+
+## How to install
+
+1. Clone this repo
+2. Run npm install
+3. Change the PeerJS port in [script.js](public/script.js)
+4. Run npm start
+
+## Authors
+
+- Wessel van Gils
+- Boris Pouw
