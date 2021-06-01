@@ -1,5 +1,5 @@
 const socket = io("/");
-const videoGrid = document.getElementById("video-grid");
+let videoGrid = document.getElementById("video-grid");
 const myPeer = new Peer(undefined, {
   path: "/peerjs",
   host: "/",
@@ -31,9 +31,7 @@ navigator.mediaDevices
     });
 
     socket.on("user-connected", (userId) => {
-      setTimeout(() => {
-        connectToNewUser(userId, stream);
-      }, 3000);
+      connectToNewUser(userId, stream);
     });
 
     let text = $("input");
@@ -49,7 +47,11 @@ navigator.mediaDevices
       $("ul").append(`<li class="message"><b>user</b><br/>${message}</li>`);
       scrollToBottom();
     });
-  });
+  })
+  .catch(error);
+{
+  console.log(error);
+}
 
 socket.on("user-disconnected", (userId) => {
   if (peers[userId]) peers[userId].close();
@@ -72,6 +74,22 @@ function connectToNewUser(userId, stream) {
 
   peers[userId] = call;
 }
+
+function addVideoStream(video, stream) {
+  video.srcObject = stream;
+  video.addEventListener("loadedmetadata", () => {
+    video.play();
+  });
+  videoGrid.append(video);
+
+  let gridContent = videoGrid;
+  videoGrid = gridContent;
+}
+
+const scrollToBottom = () => {
+  var d = $(".main__chat_window");
+  d.scrollTop(d.prop("scrollHeight"));
+};
 
 function addVideoStream(video, stream) {
   video.srcObject = stream;
