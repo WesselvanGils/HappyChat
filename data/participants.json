@@ -1,9 +1,8 @@
 {
     "participants": [
-        {"firstName": "John", "lastName": "Doe", "gender": "male", "email": "John@Doe.com"}, 
-        {"firstName": "Anna", "lastName": "Smith", "gender": "female", "email": "Anna@Smith.com"}, 
-        {"firstName": "Peter", "lastName": "Jones", "gender": "male", "email": "Peter@Jones.com"},
-        {"firstName": "Lenty", "lastName": "Smith", "gender": "female", "email": "Lenty@Smith.com"},
-        {"firstName": "James", "lastName": "Rocket", "gender": "male", "email": "James@Rocket.com"}
+        {"firstName": "Wessel", "lastName": "van Gils", "gender": "male", "email": "w.vangils2@student.avans.nl", "content": "Your date has been planned"}, 
+        {"firstName": "Boris", "lastName": "Pouw", "gender": "female", "email": "borispouw@hotmail.com", "content": "Your date has been planned"},
+        {"firstName": "DummyMale", "lastName": "Dumb", "gender": "male", "email": "dummy@dummy.com", "content": "Your date has been planned"},
+        {"firstName": "DummyFemale", "lastName": "Dumb", "gender": "female", "email": "dummy@dummy.com", "content": "Your date has been planned"}
     ]
 }

@@ -1,6 +1,7 @@
 const sqlDatabase = require("../data/database.connection.js")
 const database = require("../data/participants.json")
 const links = require("../data/rooms.json")
+const mailer = require("./mail.js")
 
 const participants = database.participants
 const females = participants.filter(participant => participant.gender == "female")
@@ -50,4 +51,9 @@ matches.forEach(match =>
 
         if (result) { console.log(result.affectedRows) }
     })
+
+    setTimeout(() =>
+    {
+        mailer.sendMail(males, females)
+    }, 3000)
 });

@@ -4,7 +4,7 @@
   "description": "A speeddating tool inspired by Zoom",
   "main": "roulette.js",
   "scripts": {
-    "start": "node src/mail.js",
+    "start": "node src/roulette.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
