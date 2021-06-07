@@ -1,8 +1,8 @@
 {
     "participants": [
-        {"firstName": "John", "lastName": "Doe", "gender": "male"}, 
-        {"firstName": "Anna", "lastName": "Smith", "gender": "female"}, 
-        {"firstName": "Peter", "lastName": "Jones", "gender": "male"},
-        {"firstName": "Lenty", "lastName": "Smith", "gender": "female"}
+        {"firstName": "John", "lastName": "Doe", "gender": "male", "email": "John@Doe.com"}, 
+        {"firstName": "Anna", "lastName": "Smith", "gender": "female", "email": "Anna@Smith.com"}, 
+        {"firstName": "Peter", "lastName": "Jones", "gender": "male", "email": "Peter@Jones.com"},
+        {"firstName": "Lenty", "lastName": "Smith", "gender": "female", "email": "Lenty@Smith.com"}
     ]
 }

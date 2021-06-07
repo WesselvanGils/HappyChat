@@ -5,15 +5,14 @@ const females = participants.filter(participant => participant.gender == "female
 const males = participants.filter(participant => participant.gender == "male")
 
 let matches = []
-let timeOfDate = 0
 
 males.forEach(maleParticipant =>
 {
-    timeOfDate = 0
+    let timeOfDate = 0
 
     females.forEach(femaleParticipant =>
     {
-        matches.push({ match: [ maleParticipant, femaleParticipant ], time: timeOfDate, link:"" })
+        matches.push({ match: [ maleParticipant.email, femaleParticipant.email ], time: timeOfDate, link:"" })
         timeOfDate += 15
     })
 
