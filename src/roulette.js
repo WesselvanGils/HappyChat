@@ -1,6 +1,6 @@
-const sqlDatabase = require("./data/database.connection.js")
-const database = require("./data/participants.json")
-const links = require("./data/rooms.json")
+const sqlDatabase = require("../data/database.connection.js")
+const database = require("../data/participants.json")
+const links = require("../data/rooms.json")
 
 const participants = database.participants
 const females = participants.filter(participant => participant.gender == "female")
