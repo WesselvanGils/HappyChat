@@ -17,7 +17,7 @@ males.forEach(function callback(maleParticipant, index)
 
     females.forEach(femaleParticipant =>
     {
-        matches.push({ match: [ maleParticipant.email, femaleParticipant.email ], time: timeOfDate, link: links.links[incrementer]})
+        matches.push({ male: maleParticipant.email, female: femaleParticipant.email, time: timeOfDate, link: links.links[incrementer]})
         timeOfDate += dateLength
         incrementer += 1
 
