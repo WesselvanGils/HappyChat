@@ -9,7 +9,7 @@ const males = participants.filter(participant => participant.gender == "male")
 let matches = []
 
 let timeOfDate = 0
-let incrementer = 0 
+let incrementer = 0
 
 males.forEach(function callback(maleParticipant, index) 
 {
@@ -17,11 +17,11 @@ males.forEach(function callback(maleParticipant, index)
 
     females.forEach(femaleParticipant =>
     {
-        matches.push({ male: maleParticipant.email, female: femaleParticipant.email, time: timeOfDate, link: links.links[incrementer]})
+        matches.push({ male: maleParticipant.email, female: femaleParticipant.email, time: timeOfDate, link: links.links[ incrementer ] })
         timeOfDate += dateLength
         incrementer += 1
 
-        if (incrementer > links.links.length) {incrementer = 0}
+        if (incrementer > links.links.length) { incrementer = 0 }
     })
 
     females.push(females.shift())
@@ -29,13 +29,13 @@ males.forEach(function callback(maleParticipant, index)
     if (males.length != females.length)
     {
         let difference = males.length - females.length
-        if (difference < 0) { difference *= -1}
+        if (difference < 0) { difference *= -1 }
 
         if (index == difference) 
         {
             timeOfDate = difference * dateLength
             if (difference % 2 != 0) timeOfDate += 15
-        }else
+        } else
         {
             timeOfDate = 0
         }
