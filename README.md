@@ -1,8 +1,8 @@
 # [Speeddating Tool](https://happysingles.vercel.app/create)
 
 The backend for rouletting speeddates for Happy Singles.
-This repository aims to create a backend where a schedule is created
-to match every man with every woman provided in a json format.
+This repository aims to create a backend where a schedule is created and loaded into a database
+to match every man with every woman if they are provided in a json format.
 
 ## About
 
