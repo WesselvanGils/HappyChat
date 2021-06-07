@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2021 at 11:47 AM
+-- Generation Time: Jun 07, 2021 at 01:04 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
@@ -24,13 +24,13 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `matches`
+-- Table structure for table `dates`
 --
 
-CREATE TABLE `matches` (
+CREATE TABLE `dates` (
   `Male` varchar(50) NOT NULL,
   `Female` varchar(50) NOT NULL,
-  `TimeOfDate` datetime NOT NULL,
+  `TimeOfDate` int(11) NOT NULL,
   `Link` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -39,9 +39,9 @@ CREATE TABLE `matches` (
 --
 
 --
--- Indexes for table `matches`
+-- Indexes for table `dates`
 --
-ALTER TABLE `matches`
+ALTER TABLE `dates`
   ADD PRIMARY KEY (`Male`,`Female`);
 COMMIT;
 
