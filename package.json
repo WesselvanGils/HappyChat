@@ -4,7 +4,7 @@
   "description": "A speeddating tool inspired by Zoom",
   "main": "roulette.js",
   "scripts": {
-    "start": "node src/roulette.js",
+    "start": "node src/mail.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/TheElementalDragon/HappyChat#readme",
   "dependencies": {
+    "dotenv": "^10.0.0",
     "mysql": "^2.18.1",
     "nodemailer": "^6.6.1"
   }
