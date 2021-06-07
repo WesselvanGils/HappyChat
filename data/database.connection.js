@@ -11,18 +11,19 @@ const pool = mySql.createPool(
 
 module.exports =
 {
-    addMatch: (match) =>
+    addMatch: (match, callback) =>
     {
         try
         {
             pool.getConnection((err, connection) =>
             {
-                connection.query(`INSERT INTO matches VALUES ${match} `,
+                connection.query(`INSERT INTO dates VALUES ("${match.male}", "${match.female}", "${match.time}", "${match.link}")`,
                 (error, results, fields) =>
                 {
                     connection.release()
 
-                    callback(undefined, results)
+                    if (error) callback(error, undefined)
+                    if (results) callback(undefined, results)
                 })
             })
         }

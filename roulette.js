@@ -1,3 +1,4 @@
+const sqlDatabase = require("./data/database.connection.js")
 const database = require("./data/participants.json")
 const links = require("./data/rooms.json")
 
@@ -12,7 +13,6 @@ let incrementer = 0
 
 males.forEach(function callback(maleParticipant, index) 
 {
-    console.log(index)
     const dateLength = 15
 
     females.forEach(femaleParticipant =>
@@ -43,5 +43,13 @@ males.forEach(function callback(maleParticipant, index)
 
 matches.forEach(match =>
 {
-    console.log(match)
+    sqlDatabase.addMatch(match, (error, result) =>
+    {
+        if (error) console.log(error.sqlMessage)
+
+        if (result) 
+        {
+            console.log(result.affectedRows)
+        }
+    })
 });
