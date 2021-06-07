@@ -3,6 +3,7 @@
         {"firstName": "John", "lastName": "Doe", "gender": "male", "email": "John@Doe.com"}, 
         {"firstName": "Anna", "lastName": "Smith", "gender": "female", "email": "Anna@Smith.com"}, 
         {"firstName": "Peter", "lastName": "Jones", "gender": "male", "email": "Peter@Jones.com"},
-        {"firstName": "Lenty", "lastName": "Smith", "gender": "female", "email": "Lenty@Smith.com"}
+        {"firstName": "Lenty", "lastName": "Smith", "gender": "female", "email": "Lenty@Smith.com"},
+        {"firstName": "James", "lastName": "Rocket", "gender": "male", "email": "James@Rocket.com"}
     ]
 }
