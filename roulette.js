@@ -33,7 +33,8 @@ males.forEach(function callback(maleParticipant, index)
 
         if (index == difference) 
         {
-            timeOfDate = difference * dateLength * 2
+            timeOfDate = difference * dateLength
+            if (difference % 2 != 0) timeOfDate += 15
         }else
         {
             timeOfDate = 0
