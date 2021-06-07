@@ -1,4 +1,5 @@
 const database = require("./participants.json")
+const links = require("./rooms.json")
 
 const participants = database.participants
 const females = participants.filter(participant => participant.gender == "female")
@@ -7,6 +8,7 @@ const males = participants.filter(participant => participant.gender == "male")
 let matches = []
 
 let timeOfDate = 0
+let incrementer = 0 
 
 males.forEach(function callback(maleParticipant, index) 
 {
@@ -15,8 +17,11 @@ males.forEach(function callback(maleParticipant, index)
 
     females.forEach(femaleParticipant =>
     {
-        matches.push({ match: [ maleParticipant.email, femaleParticipant.email ], time: timeOfDate, link: "" })
+        matches.push({ match: [ maleParticipant.email, femaleParticipant.email ], time: timeOfDate, link: links.links[incrementer]})
         timeOfDate += dateLength
+        incrementer += 1
+
+        if (incrementer > links.links.length) {incrementer = 0}
     })
 
     females.push(females.shift())
