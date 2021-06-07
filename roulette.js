@@ -46,8 +46,8 @@ matches.forEach(match =>
 {
     sqlDatabase.addMatch(match, (error, result) =>
     {
-        if (error) console.log(error.sqlMessage)
+        if (error) { console.log(error.sqlMessage) }
 
-        if (result) console.log(result.affectedRows)
+        if (result) { console.log(result.affectedRows) }
     })
 });
