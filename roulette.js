@@ -1,5 +1,5 @@
-const database = require("./participants.json")
-const links = require("./rooms.json")
+const database = require("./data/participants.json")
+const links = require("./data/rooms.json")
 
 const participants = database.participants
 const females = participants.filter(participant => participant.gender == "female")

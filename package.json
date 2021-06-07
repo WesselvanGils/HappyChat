@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/TheElementalDragon/HappyChat/issues"
   },
-  "homepage": "https://github.com/TheElementalDragon/HappyChat#readme"
+  "homepage": "https://github.com/TheElementalDragon/HappyChat#readme",
+  "dependencies": {
+    "mysql": "^2.18.1"
+  }
 }
