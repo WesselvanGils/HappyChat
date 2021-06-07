@@ -1,0 +1,21 @@
+{
+  "name": "happychat",
+  "version": "1.0.0",
+  "description": "A speeddating tool inspired by Zoom",
+  "main": "roulette.js",
+  "scripts": {
+    "start": "node roulette.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheElementalDragon/HappyChat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheElementalDragon/HappyChat/issues"
+  },
+  "homepage": "https://github.com/TheElementalDragon/HappyChat#readme"
+}

@@ -1,0 +1,8 @@
+{
+    "participants": [
+        {"firstName": "John", "lastName": "Doe", "gender": "male"}, 
+        {"firstName": "Anna", "lastName": "Smith", "gender": "female"}, 
+        {"firstName": "Peter", "lastName": "Jones", "gender": "male"},
+        {"firstName": "Lenty", "lastName": "Smith", "gender": "female"}
+    ]
+}
