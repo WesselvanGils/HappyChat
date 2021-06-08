@@ -24,7 +24,8 @@ module.exports =
 
                         if (error) callback(error, undefined)
                         if (results) callback(undefined, results)
-                    })
+                    }
+                )
             })
         }
         catch (error)
@@ -61,14 +62,38 @@ module.exports =
         {
             pool.getConnection((err, connection) =>
             {
-                connection.query(`SELECT * FROM dates WHERE Male = "${email}" OR Female = "${email}"`, 
-                (error, results, fields) =>
-                {
-                    connection.release()
+                connection.query(`SELECT * FROM dates WHERE Male = "${email}" OR Female = "${email}"`,
+                    (error, results, fields) =>
+                    {
+                        connection.release()
 
-                    if (error) callback(error, undefined)
-                    if (results) callback(undefined, results)
-                })
+                        if (error) callback(error, undefined)
+                        if (results) callback(undefined, results)
+                    }
+                )
+            })
+        }
+        catch (error)
+        {
+            callback(error, undefined)
+        }
+    },
+
+    clearDates: () =>
+    {
+        try
+        {
+            pool.getConnection((err, connection) =>
+            {
+                connection.query(`DELETE FROM dates`,
+                    (error, results, fields) =>
+                    {
+                        connection.release()
+
+                        if (error) callback(error, undefined)
+                        if (results) callback(undefined, results)
+                    }
+                )
             })
         }
         catch (error)

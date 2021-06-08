@@ -16,6 +16,8 @@ module.exports =
 {
     sendMail: (participants) =>
     {
+        sqlDatabase.clearDates()
+
         participants.forEach(participant =>
         {
             sqlDatabase.getUser(participant.email, (error, result) =>
