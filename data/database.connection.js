@@ -79,7 +79,7 @@ module.exports =
         }
     },
 
-    clearDates: () =>
+    clearDates: (callback) =>
     {
         try
         {

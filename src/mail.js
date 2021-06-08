@@ -16,7 +16,11 @@ module.exports =
 {
     sendMail: (participants) =>
     {
-        sqlDatabase.clearDates()
+        sqlDatabase.clearDates((err, results) =>
+        {
+            if (err) console.log(err)
+            if (results) console.log(results)
+        })
 
         participants.forEach(participant =>
         {
