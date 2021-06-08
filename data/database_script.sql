@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2021 at 01:04 PM
+-- Generation Time: Jun 08, 2021 at 10:51 AM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
@@ -31,8 +31,28 @@ CREATE TABLE `dates` (
   `Male` varchar(50) NOT NULL,
   `Female` varchar(50) NOT NULL,
   `TimeOfDate` int(11) NOT NULL,
-  `Link` varchar(50) NOT NULL
+  `Link` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `Name` varchar(50) NOT NULL,
+  `Age` int(11) NOT NULL,
+  `Email` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`Name`, `Age`, `Email`) VALUES
+('Tester Testy', 25, 'Testmans@testerdytest.com'),
+('Tester Toastie', 19, 'Toasty@potato.com');
 
 --
 -- Indexes for dumped tables
@@ -43,6 +63,12 @@ CREATE TABLE `dates` (
 --
 ALTER TABLE `dates`
   ADD PRIMARY KEY (`Male`,`Female`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`Email`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
