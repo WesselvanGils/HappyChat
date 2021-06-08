@@ -1,6 +1,7 @@
 {
     "participants": [
         {"firstName": "Tester", "lastName": "Testy", "gender": "male", "email": "Testmans@testerdytest.com"},
-        {"firstName": "Tester", "lastName": "Toastie", "gender": "female", "email": "Toasty@potato.com"}
+        {"firstName": "Tester", "lastName": "Toastie", "gender": "female", "email": "Toasty@potato.com"},
+        {"firstName": "Tester", "lastName": "Testy", "gender": "male", "email": "9@9.com"}
     ]
 }

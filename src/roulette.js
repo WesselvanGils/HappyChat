@@ -8,17 +8,20 @@ const participants = database.participants
 const females = participants.filter(participant => participant.gender == "female")
 const males = participants.filter(participant => participant.gender == "male")
 
-let matches = []
-
 let timeOfDate = config.startingTime
 let incrementer = 0
 
-males.forEach(function callback(maleParticipant, index) 
+males.forEach(async function callback(maleParticipant, index) 
 {
+    let match
+
     females.forEach(femaleParticipant =>
     {
-        matches.push({ male: maleParticipant.email, female: femaleParticipant.email, time: timeOfDate, link: links.links[ incrementer ] })
-        timeOfDate = addTime(timeOfDate, config.dateLenght)
+        match = { male: maleParticipant.email, female: femaleParticipant.email, time: timeOfDate, link: links.links[ incrementer ] }
+        addTime(timeOfDate, config.dateLenght, undefined, (error, result) =>
+        {
+            timeOfDate = result
+        })
         incrementer += 1
 
         if (incrementer > links.links.length) { incrementer = 0 }
@@ -31,44 +34,57 @@ males.forEach(function callback(maleParticipant, index)
         let difference = males.length - females.length
         if (difference < 0) { difference *= -1 }
 
-        if (index == difference) 
+        if (incrementer == difference) 
         {
-            timeOfDate = addTime(timeOfDate, config.dateLenght, difference)
-            if (difference % 2 != 0) { timeOfDate = addTime(timeOfDate, config.dateLenght) }
+            addTime(timeOfDate, config.dateLenght, difference, (error, result) =>
+            {
+                timeOfDate = result
+                console.log(timeOfDate)
+            })
+            console.log(difference)
+            if (difference % 2 == 0)
+            {
+                addTime(timeOfDate, config.dateLenght, undefined, (error, result) =>
+                {
+                    timeOfDate = result
+                    console.log("I should never fire")
+                })
+            }
         } else
         {
-            timeOfDate = setMinutes(timeOfDate, 0)
+            setMinutes(timeOfDate, 0, (error, result) => timeOfDate = result)
         }
+    } else
+    {
+        setMinutes(timeOfDate, 0, (error, result) => timeOfDate = result)
     }
-})
 
-matches.forEach(match =>
-{
+    console.log(match)
     sqlDatabase.addMatch(match, (error, result) =>
     {
         if (error) { console.log(error.sqlMessage) }
 
-        if (result) { console.log(result.affectedRows) }
+        //if (result) { console.log(result.affectedRows) }
     })
-});
+})
 
 setTimeout(() =>
 {
     mailer.sendMail(participants)
 }, 3000)
 
-function addTime(timeOfDateString, increment, differnce)
+function addTime(timeOfDateString, increment, difference, callback)
 {
     let time = timeOfDateString.split(":")
     time[ 0 ] = parseInt(time[ 0 ], 10)
     time[ 1 ] = parseInt(time[ 1 ], 10)
     increment = parseInt(increment, 10)
 
-    if (!differnce) time[ 1 ] += increment
+    if (!difference) time[ 1 ] += increment
 
-    if (differnce) 
+    if (difference) 
     {
-        let offSet = diffence * increment
+        let offSet = difference * increment
         time[ 1 ] = offSet
     }
 
@@ -78,17 +94,15 @@ function addTime(timeOfDateString, increment, differnce)
         time[ 1 ] -= 60
     }
 
-    console.log(`${time[ 0 ]}:${time[ 1 ]}`)
-    return `${time[ 0 ]}:${time[ 1 ]}`
+    callback(undefined, `${time[ 0 ]}:${time[ 1 ]}`)
 }
 
-function setMinutes(timeOfDateString, setter)
+function setMinutes(timeOfDateString, setter, callback)
 {
     let time = timeOfDateString.split(":")
 
     time[ 1 ] = parseInt(time[ 1 ], 10)
     time[ 1 ] = setter
 
-    console.log(`${time[ 0 ]}:${time[ 1 ]}`)
-    return `${time[ 0 ]}:${time[ 1 ]}`
+    callback(undefined, `${time[ 0 ]}:${time[ 1 ]}`)
 }
