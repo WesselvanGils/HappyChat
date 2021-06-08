@@ -6,5 +6,11 @@
         {"year": "yyyy"},
         {"month": "mm"},
         {"day": "dd"}
+    ],
+    "comment":
+    [
+        {"startingTime": "StartingTime defines when the schedule is supposed to start"},
+        {"dateLength": "Defines the duration of a SINGLE date"},
+        {"startingDate": "StartingDate defines the date on which the speeddates are supposed to take place, in the format yyyy-mm-dd"}
     ]
 }
