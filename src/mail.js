@@ -60,11 +60,11 @@ module.exports =
 
                         console.log(schedule)
 
-                        // transporter.sendMail(mailOptions, function (erry, info)
-                        // {
-                        //     if (erry) { console.log(erry) }
-                        //     if (info) { console.log('Email sent: ' + info.response) }
-                        // })
+                        transporter.sendMail(mailOptions, function (erry, info)
+                        {
+                            if (erry) { console.log(erry) }
+                            if (info) { console.log('Email sent: ' + info.response) }
+                        })
                     })
                 }
                 else
