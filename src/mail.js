@@ -58,9 +58,9 @@ module.exports =
                             text: text
                         }
 
-                        transporter.sendMail(mailOptions, function (err, info)
+                        transporter.sendMail(mailOptions, function (erry, info)
                         {
-                            if (err) { console.log(error) }
+                            if (erry) { console.log(erry) }
                             if (info) { console.log('Email sent: ' + info.response) }
                         })
                     })
