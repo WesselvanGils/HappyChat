@@ -16,12 +16,6 @@ module.exports =
 {
     sendMail: (participants) =>
     {
-        sqlDatabase.clearDates((err, results) =>
-        {
-            if (err) console.log(err)
-            if (results) console.log(results)
-        })
-
         participants.forEach(participant =>
         {
             sqlDatabase.getUser(participant.email, (error, result) =>
@@ -33,14 +27,14 @@ module.exports =
                     result = result[ 0 ]
 
                     let schedule = []
-                    let text = ""
+                    let text = "Bij deze het schema van je aankomende speeddate sessie. \n "
                     sqlDatabase.getDates(result.Email, (err, dates) =>
                     {
                         if (participant.gender == "male")
                         {
                             dates.forEach(date =>
                             {
-                                schedule.push(`${date.Male} your date with ${date.Female} has been planned in at ${date.TimeOfDate}! Here is your link ${date.Link}`)
+                                schedule.push(`${date.Male} je date met ${date.Female} is ingepland op ${date.TimeOfDate}! Hier is de link \n ${date.Link} \n`)
                             })
                         }
 
@@ -48,7 +42,7 @@ module.exports =
                         {
                             dates.forEach(date =>
                             {
-                                schedule.push(`${date.Female} your date with ${date.Male} has been planned in at ${date.TimeOfDate}! Here is your link ${date.Link}`)
+                                schedule.push(`${date.Female} je date met ${date.Male} is ingepland op ${date.TimeOfDate}! Hier is de link \n ${date.Link} \n`)
                             })
                         }
 
@@ -66,11 +60,11 @@ module.exports =
 
                         console.log(schedule)
 
-                        transporter.sendMail(mailOptions, function (erry, info)
-                        {
-                            if (erry) { console.log(erry) }
-                            if (info) { console.log('Email sent: ' + info.response) }
-                        })
+                        // transporter.sendMail(mailOptions, function (erry, info)
+                        // {
+                        //     if (erry) { console.log(erry) }
+                        //     if (info) { console.log('Email sent: ' + info.response) }
+                        // })
                     })
                 }
                 else
