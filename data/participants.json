@@ -1,8 +1,6 @@
 {
     "participants": [
-        {"firstName": "Wessel", "lastName": "van Gils", "gender": "male", "email": "w.vangils2@student.avans.nl", "content": "Your date has been planned"}, 
-        {"firstName": "Boris", "lastName": "Pouw", "gender": "female", "email": "borispouw@hotmail.com", "content": "Your date has been planned"},
-        {"firstName": "DummyMale", "lastName": "Dumb", "gender": "male", "email": "dummy@dummy.com", "content": "Your date has been planned"},
-        {"firstName": "DummyFemale", "lastName": "Dumb", "gender": "female", "email": "dummy@dummy.com", "content": "Your date has been planned"}
+        {"firstName": "Tester", "lastName": "Testy", "gender": "male", "email": "Testmans@testerdytest.com"},
+        {"firstName": "Tester", "lastName": "Toastie", "gender": "female", "email": "Toasty@potato.com"}
     ]
 }
