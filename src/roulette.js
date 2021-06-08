@@ -11,7 +11,7 @@ const males = participants.filter(participant => participant.gender == "male")
 let timeOfDate = config.startingTime
 let incrementer = 0
 
-males.forEach(async function callback(maleParticipant, index) 
+males.forEach(function callback(maleParticipant, index) 
 {
     let match
 
