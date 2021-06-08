@@ -66,12 +66,16 @@ males.forEach(function callback(maleParticipant, index)
 
         //if (result) { console.log(result.affectedRows) }
     })
+    if (incrementer + 1 === participants.length)
+    {
+        notifyParticipants(participants)
+    }
 })
 
-setTimeout(() =>
+function notifyParticipants(daters)
 {
-    mailer.sendMail(participants)
-}, 3000)
+    mailer.sendMail(daters)
+}
 
 function addTime(timeOfDateString, increment, difference, callback)
 {
