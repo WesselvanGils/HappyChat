@@ -33,13 +33,13 @@ module.exports =
         }
     },
 
-    getByMaleEmail: (email, callback) =>
+    getUser: (email, callback) =>
     {
         try
         {
             pool.getConnection((err, connection) =>
             {
-                connection.query(`SELECT * FROM dates WHERE Male = "${email}"`,
+                connection.query(`SELECT * FROM users WHERE Email = "${email}"`,
                     (error, results, fields) =>
                     {
                         connection.release()
@@ -55,23 +55,23 @@ module.exports =
         }
     },
 
-    getByFemaleEmail: (email, callback) =>
+    getDates: (email, callback) =>
     {
         try
         {
             pool.getConnection((err, connection) =>
             {
-                connection.query(`SELECT * FROM dates WHERE Female = "${email}"`,
-                    (error, results, fields) =>
-                    {
-                        connection.release()
+                connection.query(`SELECT * FROM dates WHERE Male = "${email}" OR Female = "${email}"`, 
+                (error, results, fields) =>
+                {
+                    connection.release()
 
-                        if (error) callback(error, undefined)
-                        if (results) callback(undefined, results)
-                    }
-                )
+                    if (error) callback(error, undefined)
+                    if (results) callback(undefined, results)
+                })
             })
-        } catch (error)
+        }
+        catch (error)
         {
             callback(error, undefined)
         }

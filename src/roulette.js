@@ -51,9 +51,9 @@ matches.forEach(match =>
 
         if (result) { console.log(result.affectedRows) }
     })
-
-    setTimeout(() =>
-    {
-        mailer.sendMail(males, females)
-    }, 3000)
 });
+
+setTimeout(() =>
+{
+    mailer.sendMail(participants)
+}, 3000)
