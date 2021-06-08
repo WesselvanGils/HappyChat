@@ -1,0 +1,10 @@
+{
+    "startingTime": "00:00",
+    "dateLenght": "15",
+    "startingDate": 
+    [
+        {"year": "yyyy"},
+        {"month": "mm"},
+        {"day": "dd"}
+    ]
+}

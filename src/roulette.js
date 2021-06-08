@@ -2,6 +2,7 @@ const sqlDatabase = require("../data/database.connection.js")
 const database = require("../data/participants.json")
 const links = require("../data/rooms.json")
 const mailer = require("./mail.js")
+const config = require("../data/config.json")
 
 const participants = database.participants
 const females = participants.filter(participant => participant.gender == "female")
@@ -9,17 +10,15 @@ const males = participants.filter(participant => participant.gender == "male")
 
 let matches = []
 
-let timeOfDate = 0
+let timeOfDate = config.startingTime
 let incrementer = 0
 
 males.forEach(function callback(maleParticipant, index) 
 {
-    const dateLength = 15
-
     females.forEach(femaleParticipant =>
     {
         matches.push({ male: maleParticipant.email, female: femaleParticipant.email, time: timeOfDate, link: links.links[ incrementer ] })
-        timeOfDate += dateLength
+        timeOfDate = addTime(timeOfDate, config.dateLenght)
         incrementer += 1
 
         if (incrementer > links.links.length) { incrementer = 0 }
@@ -34,11 +33,11 @@ males.forEach(function callback(maleParticipant, index)
 
         if (index == difference) 
         {
-            timeOfDate = difference * dateLength
-            if (difference % 2 != 0) { timeOfDate += 15 }
+            timeOfDate = addTime(timeOfDate, config.dateLenght, difference)
+            if (difference % 2 != 0) { timeOfDate = addTime(timeOfDate, config.dateLenght) }
         } else
         {
-            timeOfDate = 0
+            timeOfDate = setMinutes(timeOfDate, 0)
         }
     }
 })
@@ -57,3 +56,39 @@ setTimeout(() =>
 {
     mailer.sendMail(participants)
 }, 3000)
+
+function addTime(timeOfDateString, increment, differnce)
+{
+    let time = timeOfDateString.split(":")
+    time[ 0 ] = parseInt(time[ 0 ], 10)
+    time[ 1 ] = parseInt(time[ 1 ], 10)
+    increment = parseInt(increment, 10)
+
+    if (!differnce) time[ 1 ] += increment
+
+    if (differnce) 
+    {
+        let offSet = diffence * increment
+        time[ 1 ] = offSet
+    }
+
+    if (time[ 1 ] >= 60) 
+    {
+        time[ 0 ] += 1
+        time[ 1 ] -= 60
+    }
+
+    console.log(`${time[ 0 ]}:${time[ 1 ]}`)
+    return `${time[ 0 ]}:${time[ 1 ]}`
+}
+
+function setMinutes(timeOfDateString, setter)
+{
+    let time = timeOfDateString.split(":")
+
+    time[ 1 ] = parseInt(time[ 1 ], 10)
+    time[ 1 ] = setter
+
+    console.log(`${time[ 0 ]}:${time[ 1 ]}`)
+    return `${time[ 0 ]}:${time[ 1 ]}`
+}
