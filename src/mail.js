@@ -62,10 +62,10 @@ module.exports =
 
                         console.log(schedule)
 
-                        // transporter.sendMail(mailOptions, function (erry, info)
-                        // {
-                        //     if (erry) { console.log(erry.response) }
-                        //     if (info) { console.log('Email sent: ' + info.response) }
+                        transporter.sendMail(mailOptions, function (erry, info)
+                        {
+                            if (erry) { console.log(erry.response) }
+                            if (info) { console.log('Email sent: ' + info.response) }
 
                             incrementer += 1
 
@@ -73,8 +73,7 @@ module.exports =
                             {
                                 process.exit()
                             }
-                        // })
-
+                        })
                     })
                 }
                 else
