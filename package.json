@@ -5,7 +5,7 @@
   "main": "roulette.js",
   "scripts": {
     "start": "node src/roulette.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -reporter spec tests/**/*.test.js --exit"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,9 @@
     "nodemailer": "^6.6.1"
   },
   "devDependencies": {
-    "dotenv": "^10.0.0"
+    "dotenv": "^10.0.0",
+    "jest": "^27.0.4",
+    "mocha": "^9.0.0",
+    "nodemailer-mock": "^1.5.9"
   }
 }
