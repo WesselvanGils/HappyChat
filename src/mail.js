@@ -67,9 +67,9 @@ module.exports =
                             if (erry) { console.log(erry.response) }
                             if (info) { console.log('Email sent: ' + info.response) }
 
-                            incrementer += 1
-
-                            if (incrementer >= participants.length)
+                            incrementer++
+                            
+                            if (incrementer + 1 >= participants.length)
                             {
                                 process.exit()
                             }

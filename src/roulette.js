@@ -12,7 +12,7 @@ let timeOfDate = config.startingTime
 let incrementer = 0
 
 let matches = []
-let index
+let index = 0 
 
 males.forEach(maleParticipant => 
 {
@@ -61,11 +61,15 @@ males.forEach(maleParticipant =>
         setMinutes(timeOfDate, 0, (error, result) => timeOfDate = result)
     }
 
-    if (incrementer + 1 >= participants.length)
+    if (index >= males.length)
     {
         addToDatabase(matches, (isDone) =>
         {
-            if (isDone) notifyParticipants(participants)
+            if (isDone)
+            {
+                console.log("sending mails!")
+                mailer.sendMail(participants)
+            }
         })
     }
 })
@@ -79,30 +83,24 @@ function addToDatabase(dates, callback)
 
         if (isDone)
         {
-            let increaser
-            dates.forEach(match =>
+            let increaser = 0 
+            dates.forEach(date =>
             {
-                sqlDatabase.addMatch(match, (error, result) =>
+                sqlDatabase.addMatch(date, (error, result) =>
                 {
                     if (error) { console.log(error.sqlMessage) }
 
-                    if (result) { console.log(result.affectedRows) }
+                    //if (result) { console.log(result.affectedRows) }
 
                     increaser++
+                    if (increaser == dates.length)
+                    {
+                        callback(true)
+                    }
                 })
-
-                if (incrementer >= matches.length)
-                {
-                    callback(true)
-                }
             })
         }
     })
-}
-
-function notifyParticipants(daters)
-{
-    mailer.sendMail(daters)
 }
 
 function addTime(timeOfDateString, increment, difference, callback)
