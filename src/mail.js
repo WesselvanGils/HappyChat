@@ -36,7 +36,7 @@ module.exports =
                         {
                             dates.forEach(date =>
                             {
-                                schedule.push(`${date.Male} je date met ${date.Female} is ingepland op ${date.TimeOfDate}! Hier is de link \n ${date.Link} \n`)
+                                schedule.push(`${date.person1} je date met ${date.person2} is ingepland op ${date.TimeOfDate}! Hier is de link \n ${date.Link} \n`)
                             })
                         }
 
@@ -44,7 +44,7 @@ module.exports =
                         {
                             dates.forEach(date =>
                             {
-                                schedule.push(`${date.Female} je date met ${date.Male} is ingepland op ${date.TimeOfDate}! Hier is de link \n ${date.Link} \n`)
+                                schedule.push(`${date.person1} je date met ${date.person2} is ingepland op ${date.TimeOfDate}! Hier is de link \n ${date.Link} \n`)
                             })
                         }
 
@@ -60,20 +60,20 @@ module.exports =
                             text: text
                         }
 
-                        console.log(schedule)
+                        //console.log(schedule)
 
-                        transporter.sendMail(mailOptions, function (erry, info)
-                        {
-                            if (erry) { console.log(erry.response) }
-                            if (info) { console.log('Email sent: ' + info.response) }
+                        // transporter.sendMail(mailOptions, function (erry, info)
+                        // {
+                        //     if (erry) { console.log(erry.response) }
+                        //     if (info) { console.log('Email sent: ' + info.response) }
 
                             incrementer++
-                            
+
                             if (incrementer + 1 >= participants.length)
                             {
                                 process.exit()
                             }
-                        })
+                        // })
                     })
                 }
                 else

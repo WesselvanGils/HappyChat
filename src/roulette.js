@@ -9,69 +9,59 @@ const females = participants.filter(participant => participant.gender == "female
 const males = participants.filter(participant => participant.gender == "male")
 
 let timeOfDate = config.startingTime
-let incrementer = 0
 
 let matches = []
-let index = 0 
+let timeSlots = []
+let index = 0
 
-males.forEach(maleParticipant => 
+let outer
+let inner
+
+for (let i = 0; i < females.length * males.length / 2; i++)
 {
-
-    females.forEach(femaleParticipant =>
+    timeSlots.push(timeOfDate)
+    addTime(timeOfDate, config.dateLenght, undefined, (error, result) =>
     {
-        matches.push({ male: maleParticipant.email, female: femaleParticipant.email, time: timeOfDate, link: links.links[ incrementer ] })
-        addTime(timeOfDate, config.dateLenght, undefined, (error, result) =>
-        {
-            timeOfDate = result
-        })
-        incrementer++
+        timeOfDate = result
+    })
+}
 
-        if (incrementer > links.links.length) { incrementer = 0 }
+if (males <= females)
+{
+    outer = males
+    inner = females
+} else
+{
+    outer = females
+    inner = males
+}
+
+outer.forEach(outerParticipant => 
+{
+    let incrementer = 0
+
+    inner.forEach(innerParticipant =>
+    {
+        matches.push({ person1: outerParticipant.email, person2: innerParticipant.email, time: timeSlots[incrementer], link: links.links[ incrementer ] })
+        incrementer++
     })
 
-    females.push(females.shift())
+    //inner.push(inner.shift())
+    timeSlots.push(timeSlots.shift())
 
-    index++
-
-    if (males.length != females.length)
+    if (index == outer.length - 1)
     {
-        let difference = males.length - females.length
-        if (difference < 0) { difference *= -1 }
-
-        if (index == difference) 
-        {
-            addTime(timeOfDate, config.dateLenght, difference, (error, result) =>
-            {
-                timeOfDate = result
-            })
-
-            if (difference % 2 == 0)
-            {
-                addTime(timeOfDate, config.dateLenght, undefined, (error, result) =>
-                {
-                    timeOfDate = result
-                })
-            }
-        } else
-        {
-            setMinutes(timeOfDate, 0, (error, result) => timeOfDate = result)
-        }
-    } else
-    {
-        setMinutes(timeOfDate, 0, (error, result) => timeOfDate = result)
-    }
-
-    if (index >= males.length)
-    {
+        console.log(matches)
         addToDatabase(matches, (isDone) =>
         {
             if (isDone)
             {
-                console.log("sending mails!")
                 mailer.sendMail(participants)
             }
         })
     }
+
+    index++
 })
 
 function addToDatabase(dates, callback)

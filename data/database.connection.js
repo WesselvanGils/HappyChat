@@ -17,7 +17,7 @@ module.exports =
         {
             pool.getConnection((err, connection) =>
             {
-                connection.query(`INSERT INTO dates VALUES ("${match.male}", "${match.female}", "${match.time}", "${match.link}")`,
+                connection.query(`INSERT INTO dates VALUES ("${match.person1}", "${match.person2}", "${match.time}", "${match.link}")`,
                     (error, results, fields) =>
                     {
                         connection.release()
@@ -62,7 +62,7 @@ module.exports =
         {
             pool.getConnection((err, connection) =>
             {
-                connection.query(`SELECT * FROM dates WHERE Male = "${email}" OR Female = "${email}"`,
+                connection.query(`SELECT * FROM dates WHERE person1 = "${email}" OR person2 = "${email}"`,
                     (error, results, fields) =>
                     {
                         connection.release()
