@@ -46,7 +46,7 @@ males.forEach(maleParticipant =>
             {
                 timeOfDate = result
             })
-            
+
             if (difference % 2 == 0)
             {
                 addTime(timeOfDate, config.dateLenght, undefined, (error, result) =>
@@ -69,7 +69,7 @@ males.forEach(maleParticipant =>
 
         //if (result) { console.log(result.affectedRows) }
     })
-    if (incrementer + 1 === participants.length)
+    if (incrementer >= participants.length)
     {
         notifyParticipants(participants)
     }
