@@ -11,36 +11,34 @@ const males = participants.filter(participant => participant.gender == "male")
 let timeOfDate = config.startingTime
 let incrementer = 0
 
-sqlDatabase.clearDates((err, results) =>
-{
-    if (err) console.log(err)
-    // if (results) console.log(results)
-})
+let matches = []
+let index
 
 males.forEach(maleParticipant => 
 {
-    let match
 
     females.forEach(femaleParticipant =>
     {
-        match = { male: maleParticipant.email, female: femaleParticipant.email, time: timeOfDate, link: links.links[ incrementer ] }
+        matches.push({ male: maleParticipant.email, female: femaleParticipant.email, time: timeOfDate, link: links.links[ incrementer ] })
         addTime(timeOfDate, config.dateLenght, undefined, (error, result) =>
         {
             timeOfDate = result
         })
-        incrementer += 1
+        incrementer++
 
         if (incrementer > links.links.length) { incrementer = 0 }
     })
 
     females.push(females.shift())
 
+    index++
+
     if (males.length != females.length)
     {
         let difference = males.length - females.length
         if (difference < 0) { difference *= -1 }
 
-        if (incrementer == difference) 
+        if (index == difference) 
         {
             addTime(timeOfDate, config.dateLenght, difference, (error, result) =>
             {
@@ -63,17 +61,44 @@ males.forEach(maleParticipant =>
         setMinutes(timeOfDate, 0, (error, result) => timeOfDate = result)
     }
 
-    sqlDatabase.addMatch(match, (error, result) =>
+    if (incrementer + 1 >= participants.length)
     {
-        if (error) { console.log(error.sqlMessage) }
-
-        //if (result) { console.log(result.affectedRows) }
-    })
-    if (incrementer >= participants.length)
-    {
-        notifyParticipants(participants)
+        addToDatabase(matches, (isDone) =>
+        {
+            if (isDone) notifyParticipants(participants)
+        })
     }
 })
+
+function addToDatabase(dates, callback)
+{
+    sqlDatabase.clearDates((err, results, isDone) =>
+    {
+        if (err) console.log(err)
+        // if (results) console.log(results)
+
+        if (isDone)
+        {
+            let increaser
+            dates.forEach(match =>
+            {
+                sqlDatabase.addMatch(match, (error, result) =>
+                {
+                    if (error) { console.log(error.sqlMessage) }
+
+                    if (result) { console.log(result.affectedRows) }
+
+                    increaser++
+                })
+
+                if (incrementer >= matches.length)
+                {
+                    callback(true)
+                }
+            })
+        }
+    })
+}
 
 function notifyParticipants(daters)
 {

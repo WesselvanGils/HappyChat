@@ -90,15 +90,15 @@ module.exports =
                     {
                         connection.release()
 
-                        if (error) callback(error, undefined)
-                        if (results) callback(undefined, results)
+                        if (error) callback(error, undefined, false)
+                        if (results) callback(undefined, results, true)
                     }
                 )
             })
         }
         catch (error)
         {
-            callback(error, undefined)
+            callback(error, undefined, false)
         }
     }
 }
