@@ -16,6 +16,8 @@ module.exports =
 {
     sendMail: (participants) =>
     {
+        let incrementer = 0
+
         participants.forEach(participant =>
         {
             sqlDatabase.getUser(participant.email, (error, result) =>
@@ -58,13 +60,19 @@ module.exports =
                             text: text
                         }
 
-                        console.log(schedule)
-
                         transporter.sendMail(mailOptions, function (erry, info)
                         {
-                            if (erry) { console.log(erry) }
+                            if (erry) { console.log(erry.response) }
                             if (info) { console.log('Email sent: ' + info.response) }
+
+                            incrementer += 1
+
+                            if (incrementer >= participants.length)
+                            {
+                                process.exit()
+                            }
                         })
+
                     })
                 }
                 else

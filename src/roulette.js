@@ -14,10 +14,10 @@ let incrementer = 0
 sqlDatabase.clearDates((err, results) =>
 {
     if (err) console.log(err)
-    if (results) console.log(results)
+    // if (results) console.log(results)
 })
 
-males.forEach(function callback(maleParticipant, index) 
+males.forEach(maleParticipant => 
 {
     let match
 
@@ -45,15 +45,13 @@ males.forEach(function callback(maleParticipant, index)
             addTime(timeOfDate, config.dateLenght, difference, (error, result) =>
             {
                 timeOfDate = result
-                console.log(timeOfDate)
             })
-            console.log(difference)
+            
             if (difference % 2 == 0)
             {
                 addTime(timeOfDate, config.dateLenght, undefined, (error, result) =>
                 {
                     timeOfDate = result
-                    console.log("I should never fire")
                 })
             }
         } else
@@ -65,7 +63,6 @@ males.forEach(function callback(maleParticipant, index)
         setMinutes(timeOfDate, 0, (error, result) => timeOfDate = result)
     }
 
-    console.log(match)
     sqlDatabase.addMatch(match, (error, result) =>
     {
         if (error) { console.log(error.sqlMessage) }
