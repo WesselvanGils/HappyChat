@@ -4,6 +4,6 @@
         {"firstName": "Wessel", "lastName": "van Gils", "gender": "male", "email": "wesselwammes@hotmail.com"},
         {"firstName": "Tester", "lastName": "Testy", "gender": "male", "email": "9@9.com"},
         {"firstName": "Boris", "lastName": "Pouw", "gender": "female", "email": "5@6.com"},
-        {"firstName": "Boris", "lastName": "Pouw", "gender": "female", "email": "1@2.com"}
+        {"firstName": "Tester", "lastName": "Testy", "gender": "male", "email": "1@2.com"}
     ]
 }

@@ -1,7 +1,6 @@
 const config = require("../data/config.json")
 const links = require("../data/rooms.json")
 
-let timeSlots = []
 let index = 0
 
 let outerLoop
@@ -17,7 +16,7 @@ module.exports =
             {
                 callback(dates)
             })
-        }else
+        } else
         {
             if (males.length < females.length)
             {
@@ -28,16 +27,22 @@ module.exports =
                 outerLoop = females
                 innerLoop = males
             }
+
+            makeOddMatches(innerLoop, outerLoop, (dates) =>
+            {
+                callback(dates)
+            })
         }
     }
 }
 
 let matches = []
+let timeSlots = []
 let timeOfDate = config.startingTime
 
 function makeEvenMatches(inner, outer, callback)
 {
-    for (let i = 0; i < inner.length * 2; i++)
+    for (let value of inner)
     {
         timeSlots.push(timeOfDate)
         addTime(timeOfDate, config.dateLenght, undefined, (error, result) =>
@@ -45,6 +50,39 @@ function makeEvenMatches(inner, outer, callback)
             timeOfDate = result
         })
     }
+
+    outer.forEach(outerParticipant => 
+    {
+        let incrementer = 0
+
+        inner.forEach(innerParticipant =>
+        {
+            matches.push({ person1: outerParticipant.email, person2: innerParticipant.email, time: timeSlots[ incrementer ], link: links.links[ incrementer ] })
+            incrementer++
+        })
+
+        inner.push(inner.shift())
+
+        if (index == outer.length - 1)
+        {
+            callback(matches)
+        }
+
+        index++
+    })
+}
+
+function makeOddMatches(inner, outer, callback)
+{
+    for (let i = 0; i < inner.length * outer.length - (inner.length - outer.length); i++)
+    {
+        timeSlots.push(timeOfDate)
+        addTime(timeOfDate, config.dateLenght, undefined, (error, result) =>
+        {
+            timeOfDate = result
+        })
+    }
+
     outer.forEach(outerParticipant => 
     {
         let incrementer = 0
@@ -64,11 +102,6 @@ function makeEvenMatches(inner, outer, callback)
 
         index++
     })
-}
-
-function makeOddMatches(inner, outer, callback)
-{
-    
 }
 
 function addTime(timeOfDateString, increment, difference, callback)
