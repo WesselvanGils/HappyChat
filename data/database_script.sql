@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2021 at 10:51 AM
+-- Generation Time: Jun 10, 2021 at 12:11 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
@@ -28,11 +28,12 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `dates` (
-  `Male` varchar(50) NOT NULL,
-  `Female` varchar(50) NOT NULL,
-  `TimeOfDate` int(11) NOT NULL,
+  `person1` varchar(50) NOT NULL,
+  `person2` varchar(50) NOT NULL,
+  `TimeOfDate` varchar(5) NOT NULL,
   `Link` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 -- --------------------------------------------------------
 
@@ -51,8 +52,16 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`Name`, `Age`, `Email`) VALUES
+('Tester', 5, '1@2.com'),
+('Tester', 5, '3@4.com'),
+('Tester', 5, '5@6.com'),
+('Tester', 5, '7@8.com'),
+('Henk', 3, '9@9.com'),
+('Boris Pouw', 66, 'borispouw@hotmail.com'),
 ('Tester Testy', 25, 'Testmans@testerdytest.com'),
-('Tester Toastie', 19, 'Toasty@potato.com');
+('Tester Toastie', 19, 'Toasty@potato.com'),
+('Wessel van Gils', 18, 'w.vangils2@student.avans.nl'),
+('Wessel van Gils', 5, 'wesselwammes@hotmail.com');
 
 --
 -- Indexes for dumped tables
@@ -62,7 +71,7 @@ INSERT INTO `users` (`Name`, `Age`, `Email`) VALUES
 -- Indexes for table `dates`
 --
 ALTER TABLE `dates`
-  ADD PRIMARY KEY (`Male`,`Female`);
+  ADD PRIMARY KEY (`person1`,`person2`);
 
 --
 -- Indexes for table `users`
