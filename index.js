@@ -10,7 +10,7 @@ const males = participants.filter(participant => participant.gender == "male")
 matchMaker.getMatches(males, females, (result) =>
 {
     console.log(result) 
-    addToDatabase(matches, (isDone) =>
+    addToDatabase(result, (isDone) =>
     {
         if (isDone)
         {
