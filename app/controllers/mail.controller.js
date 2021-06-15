@@ -36,7 +36,7 @@ module.exports =
                     if (participant.username == date.person1) otherPerson = date.person2
                     if (participant.username == date.person2) otherPerson = date.person1
 
-                    schedule.push(`\n ${participant.username} je date met ${otherPerson} is ingepland op ${date.TimeOfDate}! \n Doe mee via deze link: ${result[ 0 ].Link} \n`)
+                    schedule.push(`\n ${participant.username} je date met ${otherPerson} is ingepland op ${date.TimeOfDate}! \n Doe mee via deze link: ${date.link} \n`)
                 })
 
                 schedule.forEach(string => 
