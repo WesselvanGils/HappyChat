@@ -42,7 +42,7 @@ let index = 0
 function makeMatches(inner, outer, uneven, callback)
 {
     let timeSlotCount
-    if (unenven) timeSlotCount = inner.length * outer.length - (inner.length - outer.length)
+    if (uneven) timeSlotCount = inner.length * outer.length - (inner.length - outer.length)
     else timeSlotCount = inner.length
 
     for (let i = 0; i < timeSlotCount; i++)
