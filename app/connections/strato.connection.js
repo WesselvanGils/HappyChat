@@ -61,6 +61,29 @@ module.exports =
 
     /* ----- All queries relating to dates ------ */
 
+    getDates: (dateID, callback) =>
+    {
+        try
+        {
+            pool.getConnection((err, connection) =>
+            {
+                connection.query(`SELECT dates.DateOfDate, dates.TimeOfDate, dates.Link FROM dates WHERE dateID = '1'`,
+                    (error, results, fields) =>
+                    {
+                        connection.release()
+
+                        if (error) callback(error, undefined)
+                        if (results) callback(undefined, results)
+                    }
+                )
+            })
+        }
+        catch (error)
+        {
+            callback(error, undefined)
+        }
+    },
+
     addDates: (TimeOfDate, TimeOfClosure, Link, callback) =>
     {
         try

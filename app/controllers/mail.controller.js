@@ -1,6 +1,6 @@
 const { config } = require("dotenv")
 const nodemailer = require("nodemailer")
-const sqlDatabase = require("../connections/strato.connection.js")
+const database = require("../connections/strato.connection.js")
 const configo = require("../../data/config.json")
 require("dotenv").config()
 
@@ -16,72 +16,55 @@ const transporter = nodemailer.createTransport({
 
 module.exports =
 {
-    sendMail: (participants) =>
+    sendMail: (dates, participants, dateID, res) =>
     {
-        let incrementer = 0
-
-        participants.forEach(participant =>
+        database.getDates(dateID, (error, result) =>
         {
-            sqlDatabase.getUser(participant.email, (error, result) =>
+            if (error) res.status(500).json({ error: error.toString() })
+
+            let incrementer = 0
+            let schedule = []
+
+            participants.forEach(participant =>
             {
-                if (error) { console.log(error) }
+                let text = "Bij deze het schema van je aankomende speeddate sessie op " + result[ 0 ].DateOfDate + "\n"
 
-                if (result.length > 0)
+                dates.forEach(date =>
                 {
-                    result = result[ 0 ]
+                    let otherPerson = ''
 
-                    let schedule = []
-                    let text = "Bij deze het schema van je aankomende speeddate sessie op " + configo.day + "/" + configo.month + "/" + configo.year + "\n"
-                    sqlDatabase.getDates(result.Email, (err, dates) =>
-                    {
-                        if (participant.gender == "male")
-                        {
-                            dates.forEach(date =>
-                            {
-                                schedule.push(`\n ${date.person1} je date met ${date.person2} is ingepland op ${date.TimeOfDate}! \n Doe mee via deze link: ${date.Link} \n`)
-                            })
-                        }
+                    if (participant.username == date.person1) otherPerson = date.person2
+                    if (participant.username == date.person2) otherPerson = date.person1
 
-                        if (participant.gender == "female")
-                        {
-                            dates.forEach(date =>
-                            {
-                                schedule.push(`\n ${date.person1} je date met ${date.person2} is ingepland op ${date.TimeOfDate}!\n Doe mee via deze link: ${date.Link} \n`)
-                            })
-                        }
+                    schedule.push(`\n ${participant.username} je date met ${otherPerson} is ingepland op ${date.TimeOfDate}! \n Doe mee via deze link: ${result[ 0 ].Link} \n`)
+                })
 
-                        schedule.forEach(string => 
-                        {
-                            text = text + string + "\n"
-                        })
-
-                        let mailOptions = {
-                            from: process.env.USER,
-                            to: result.Email,
-                            subject: 'Jouw speeddate schema!',
-                            text: text
-                        }
-
-                        console.log(schedule)
-
-                        transporter.sendMail(mailOptions, function (erry, info)
-                        {
-                            if (erry) { console.log(erry.response) }
-                            if (info) { console.log('Email sent: ' + info.response) }
-
-                            incrementer++
-
-                            if (incrementer + 1 >= participants.length)
-                            {
-                                process.exit()
-                            }
-                        })
-                    })
-                }
-                else
+                schedule.forEach(string => 
                 {
-                    console.log("The query returned empty")
+                    text = text + string + "\n"
+                })
+
+                let mailOptions = {
+                    from: process.env.USER,
+                    to: result.Email,
+                    subject: 'Jouw speeddate schema!',
+                    text: text
                 }
+
+                console.log(schedule)
+
+                // transporter.sendMail(mailOptions, function (erry, info)
+                // {
+                // if (erry) { console.log(erry.response) }
+                // if (info) { console.log('Email sent: ' + info.response) }
+
+                incrementer++
+
+                if (incrementer == participants.length)
+                {
+                    res.status(200).json({ schedule })
+                }
+                // })
             })
         })
     }

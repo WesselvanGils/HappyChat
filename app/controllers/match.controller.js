@@ -57,7 +57,7 @@ function makeEvenMatches(inner, outer, callback)
 
         inner.forEach(innerParticipant =>
         {
-            matches.push({ person1: outerParticipant.email, person2: innerParticipant.email, time: timeSlots[ incrementer ], link: links.links[ incrementer ] })
+            matches.push({ person1: outerParticipant.username, person2: innerParticipant.username, gender1: outerParticipant.gender, gender2: innerParticipant.gender, email1: outerParticipant.email, email2: innerParticipant.email, time: timeSlots[ incrementer ], link: links.links[ incrementer ] })
             incrementer++
         })
 
@@ -89,7 +89,7 @@ function makeOddMatches(inner, outer, callback)
 
         inner.forEach(innerParticipant =>
         {
-            matches.push({ person1: outerParticipant.email, person2: innerParticipant.email, time: timeSlots[ incrementer ], link: links.links[ incrementer ] })
+            matches.push({ person1: outerParticipant.username, person2: innerParticipant.username, gender1: outerParticipant.gender, gender2: innerParticipant.gender, email1: outerParticipant.email, email2: innerParticipant.email, time: timeSlots[ incrementer ], link: links.links[ incrementer ] })
             incrementer++
         })
 
