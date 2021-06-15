@@ -1,8 +1,6 @@
 const config = require("../../data/config.json")
 const links = require("../../data/rooms.json")
 
-let index = 0
-
 let outerLoop
 let innerLoop
 
@@ -12,7 +10,7 @@ module.exports =
     {
         if (males.length == females.length)
         {
-            makeEvenMatches(males, females, (dates) =>
+            makeMatches(males, females, false, (dates) =>
             {
                 callback(dates)
             })
@@ -27,8 +25,8 @@ module.exports =
                 outerLoop = females
                 innerLoop = males
             }
-
-            makeOddMatches(innerLoop, outerLoop, (dates) =>
+            
+            makeMatches(innerLoop, outerLoop, true, (dates) =>
             {
                 callback(dates)
             })
@@ -39,10 +37,15 @@ module.exports =
 let matches = []
 let timeSlots = []
 let timeOfDate = config.startingTime
+let index = 0
 
-function makeEvenMatches(inner, outer, callback)
+function makeMatches(inner, outer, uneven, callback)
 {
-    for (let value of inner)
+    let timeSlotCount
+    if (unenven) timeSlotCount = inner.length * outer.length - (inner.length - outer.length)
+    else timeSlotCount = inner.length
+
+    for (let i = 0; i < timeSlotCount; i++)
     {
         timeSlots.push(timeOfDate)
         addTime(timeOfDate, config.dateLenght, undefined, (error, result) =>
@@ -57,43 +60,21 @@ function makeEvenMatches(inner, outer, callback)
 
         inner.forEach(innerParticipant =>
         {
-            matches.push({ person1: outerParticipant.username, person2: innerParticipant.username, gender1: outerParticipant.gender, gender2: innerParticipant.gender, email1: outerParticipant.email, email2: innerParticipant.email, time: timeSlots[ incrementer ], link: links.links[ incrementer ] })
+            matches.push({ 
+                            person1: outerParticipant.username, 
+                            person2: innerParticipant.username, 
+                            gender1: outerParticipant.gender, 
+                            gender2: innerParticipant.gender, 
+                            email1: outerParticipant.email, 
+                            email2: innerParticipant.email, 
+                            time: timeSlots[ incrementer ], 
+                            link: links.links[ incrementer ] 
+                        })
             incrementer++
         })
 
-        inner.push(inner.shift())
-
-        if (index == outer.length - 1)
-        {
-            callback(matches)
-        }
-
-        index++
-    })
-}
-
-function makeOddMatches(inner, outer, callback)
-{
-    for (let i = 0; i < inner.length * outer.length - (inner.length - outer.length); i++)
-    {
-        timeSlots.push(timeOfDate)
-        addTime(timeOfDate, config.dateLenght, undefined, (error, result) =>
-        {
-            timeOfDate = result
-        })
-    }
-
-    outer.forEach(outerParticipant => 
-    {
-        let incrementer = 0
-
-        inner.forEach(innerParticipant =>
-        {
-            matches.push({ person1: outerParticipant.username, person2: innerParticipant.username, gender1: outerParticipant.gender, gender2: innerParticipant.gender, email1: outerParticipant.email, email2: innerParticipant.email, time: timeSlots[ incrementer ], link: links.links[ incrementer ] })
-            incrementer++
-        })
-
-        timeSlots.push(timeSlots.shift())
+        if (uneven) timeSlots.push(timeSlots.shift())
+        else inner.push(inner.shift())
 
         if (index == outer.length - 1)
         {

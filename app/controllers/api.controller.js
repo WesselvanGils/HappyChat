@@ -20,7 +20,8 @@ module.exports =
 
                 matchMaker.getMatches(males, females, (dates) =>
                 {
-                    mailer.sendMail(dates, result, req.params.dateID, res)
+                    res.status(200).json(result)
+                    //mailer.sendMail(dates, result, req.params.dateID, res)
                 })
             }
         })
