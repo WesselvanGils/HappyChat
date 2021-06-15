@@ -1,6 +1,6 @@
 const { config } = require("dotenv")
 const nodemailer = require("nodemailer")
-const sqlDatabase = require("../data/database.connection.js")
+const sqlDatabase = require("../data/database.connection.js.js")
 const configo = require("../data/config.json")
 require("dotenv").config()
 
