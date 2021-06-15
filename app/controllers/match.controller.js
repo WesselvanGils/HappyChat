@@ -1,5 +1,5 @@
-const config = require("../data/config.json")
-const links = require("../data/rooms.json")
+const config = require("../../data/config.json")
+const links = require("../../data/rooms.json")
 
 let index = 0
 

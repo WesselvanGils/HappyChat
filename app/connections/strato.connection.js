@@ -42,7 +42,7 @@ module.exports =
         {
             pool.getConnection((err, connection) =>
             {
-                connection.query(`SELECT users.username, users.email FROM participants INNER JOIN users ON participants.userID=users.ID WHERE dateID = '${dateID}'`,
+                connection.query(`SELECT users.username, users.gender, users.email FROM participants INNER JOIN users ON participants.userID=users.ID WHERE dateID = '${dateID}'`,
                     (error, results, fields) =>
                     {
                         connection.release()
