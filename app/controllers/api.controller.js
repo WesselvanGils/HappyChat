@@ -1,23 +1,10 @@
-const sqlDatabase = require("./data/database.connection.js")
-const database = require("./data/participants.json")
-const mailer = require("./src/mail.js")
-const matchMaker = require("./src/matchMaker")
+const databse = require("../connections/strato.connection.js")
+const mailer = require("./mail.controller.js")
+const matchMaker = require("./match.controller.js")
 
 const participants = database.participants
 const females = participants.filter(participant => participant.gender == "female")
 const males = participants.filter(participant => participant.gender == "male")
-
-matchMaker.getMatches(males, females, (result) =>
-{
-    console.log(result) 
-    addToDatabase(result, (isDone) =>
-    {
-        if (isDone)
-        {
-            mailer.sendMail(participants)
-        }
-    })
-})
 
 function addToDatabase(dates, callback)
 {
@@ -46,4 +33,22 @@ function addToDatabase(dates, callback)
             })
         }
     })
+}
+
+module.exports =
+{
+    start: () => 
+    {
+        matchMaker.getMatches(males, females, (result) =>
+        {
+            console.log(result)
+            addToDatabase(result, (isDone) =>
+            {
+                if (isDone)
+                {
+                    mailer.sendMail(participants)
+                }
+            })
+        })
+    }
 }

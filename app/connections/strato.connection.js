@@ -5,19 +5,21 @@ const pool = mySql.createPool(
         multipleStatements: true,
         host: "localhost",
         user: "root",
-        database: "matches"
+        database: "strato"
     }
 )
 
 module.exports =
 {
-    addMatch: (match, callback) =>
+    /* ----- All queries relating to participants ----- */
+
+    addParticipant: (userID, dateID, callback) =>
     {
         try
         {
             pool.getConnection((err, connection) =>
             {
-                connection.query(`INSERT INTO dates VALUES ("${match.person1}", "${match.person2}", "${match.time}", "${match.link}")`,
+                connection.query(`INSERT INTO participants VALUES ("${userID}", "${dateID}")`,
                     (error, results, fields) =>
                     {
                         connection.release()
@@ -34,35 +36,13 @@ module.exports =
         }
     },
 
-    getUser: (email, callback) =>
+    getParticipants: (dateID, callback) =>
     {
         try
         {
             pool.getConnection((err, connection) =>
             {
-                connection.query(`SELECT * FROM users WHERE Email = "${email}"`,
-                    (error, results, fields) =>
-                    {
-                        connection.release()
-
-                        if (error) callback(error, undefined)
-                        if (results) callback(undefined, results)
-                    }
-                )
-            })
-        } catch (error)
-        {
-            callback(error, undefined)
-        }
-    },
-
-    getDates: (email, callback) =>
-    {
-        try
-        {
-            pool.getConnection((err, connection) =>
-            {
-                connection.query(`SELECT * FROM dates WHERE person1 = "${email}" OR person2 = "${email}"`,
+                connection.query(`SELECT users.username, users.email FROM participants INNER JOIN users ON participants.userID=users.ID WHERE dateID = '${dateID}'`,
                     (error, results, fields) =>
                     {
                         connection.release()
@@ -79,26 +59,28 @@ module.exports =
         }
     },
 
-    clearDates: (callback) =>
+    /* ----- All queries relating to dates ------ */
+
+    addDates: (TimeOfDate, TimeOfClosure, Link, callback) =>
     {
         try
         {
             pool.getConnection((err, connection) =>
             {
-                connection.query(`DELETE FROM dates`,
+                connection.query(`INSERT INTO dates VALUES ("${TimeOfDate}", "${Link}", "${TimeOfClosure}")`,
                     (error, results, fields) =>
                     {
                         connection.release()
 
-                        if (error) callback(error, undefined, false)
-                        if (results) callback(undefined, results, true)
+                        if (error) callback(error, undefined)
+                        if (results) callback(undefined, results)
                     }
                 )
             })
         }
         catch (error)
         {
-            callback(error, undefined, false)
+            callback(error, undefined)
         }
-    }
+    },
 }
