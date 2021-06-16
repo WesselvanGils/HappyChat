@@ -45,7 +45,7 @@ module.exports =
 
                 let mailOptions = {
                     from: process.env.USER,
-                    to: result.Email,
+                    to: participant.email,
                     subject: 'Jouw speeddate schema!',
                     text: text
                 }
