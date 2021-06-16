@@ -32,7 +32,6 @@ module.exports =
                 dates.forEach(date =>
                 {
                     let otherPerson = ''
-                    console.log(date)
 
                     if (participant.username == date.person1) otherPerson = date.person2
                     if (participant.username == date.person2) otherPerson = date.person1
@@ -54,18 +53,18 @@ module.exports =
 
                 console.log(schedule)
 
-                // transporter.sendMail(mailOptions, function (erry, info)
-                // {
-                // if (erry) { console.log(erry.response) }
-                // if (info) { console.log('Email sent: ' + info.response) }
-
-                incrementer++
-
-                if (incrementer == participants.length)
+                transporter.sendMail(mailOptions, function (erry, info)
                 {
-                    res.status(200).json({ schedule })
-                }
-                // })
+                    if (erry) { console.log(erry.response) }
+                    if (info) { console.log('Email sent: ' + info.response) }
+
+                    incrementer++
+
+                    if (incrementer == participants.length)
+                    {
+                        res.status(200).json({ schedule })
+                    }
+                })
             })
         })
     }

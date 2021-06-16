@@ -47,13 +47,14 @@ module.exports =
     }
 }
 
-let matches = []
-let timeSlots = []
-let index = 0
 
 function makeMatches(inner, outer, uneven, callback)
 {
+    let matches = []
+    let timeSlots = []
+    let index = 0
     let timeSlotCount
+
     if (uneven) timeSlotCount = inner.length * outer.length - (inner.length - outer.length)
     else timeSlotCount = inner.length
 
@@ -117,16 +118,6 @@ function addTime(timeOfDateString, increment, difference, callback)
         time[ 0 ] += 1
         time[ 1 ] -= 60
     }
-
-    callback(undefined, `${time[ 0 ]}:${time[ 1 ]}`)
-}
-
-function setMinutes(timeOfDateString, setter, callback)
-{
-    let time = timeOfDateString.split(":")
-
-    time[ 1 ] = parseInt(time[ 1 ], 10)
-    time[ 1 ] = setter
 
     callback(undefined, `${time[ 0 ]}:${time[ 1 ]}`)
 }
