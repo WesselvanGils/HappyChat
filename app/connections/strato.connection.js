@@ -84,13 +84,13 @@ module.exports =
         }
     },
 
-    addDates: (TimeOfDate, TimeOfClosure, Link, callback) =>
+    addDates: (DateOfDate, TimeOfDate, TimeOfClosure, callback) =>
     {
         try
         {
             pool.getConnection((err, connection) =>
             {
-                connection.query(`INSERT INTO dates VALUES ("${TimeOfDate}", "${Link}", "${TimeOfClosure}")`,
+                connection.query(`INSERT INTO dates VALUES ("${DateOfDate}", "${TimeOfDate}", "${TimeOfClosure}")`,
                     (error, results, fields) =>
                     {
                         connection.release()

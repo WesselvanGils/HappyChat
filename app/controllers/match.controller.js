@@ -1,42 +1,54 @@
-const config = require("../../data/config.json")
 const links = require("../../data/rooms.json")
+const database = require("../connections/strato.connection.js")
 
 let outerLoop
 let innerLoop
 
+let lengthOfDate = 0
+let timeOfDate = ""
+
 module.exports =
 {
-    getMatches(males, females, callback)
+    getMatches(males, females, dateID, callback)
     {
-        if (males.length == females.length)
+        database.getDates(dateID, (error, result) =>
         {
-            makeMatches(males, females, false, (dates) =>
+            if (error) callback(error, undefined)
+            if (result)
             {
-                callback(dates)
-            })
-        } else
-        {
-            if (males.length < females.length)
-            {
-                outerLoop = males
-                innerLoop = females
-            } else
-            {
-                outerLoop = females
-                innerLoop = males
+                timeOfDate = result[ 0 ].TimeOfDate
+                lengthOfDate = result[ 0 ].LengthOfDate
+
+                if (males.length == females.length)
+                {
+                    makeMatches(males, females, false, (dates) =>
+                    {
+                        callback(undefined, dates)
+                    })
+                } else
+                {
+                    if (males.length < females.length)
+                    {
+                        outerLoop = males
+                        innerLoop = females
+                    } else
+                    {
+                        outerLoop = females
+                        innerLoop = males
+                    }
+
+                    makeMatches(innerLoop, outerLoop, true, (dates) =>
+                    {
+                        callback(undefined, dates)
+                    })
+                }
             }
-            
-            makeMatches(innerLoop, outerLoop, true, (dates) =>
-            {
-                callback(dates)
-            })
-        }
+        })
     }
 }
 
 let matches = []
 let timeSlots = []
-let timeOfDate = config.startingTime
 let index = 0
 
 function makeMatches(inner, outer, uneven, callback)
@@ -48,7 +60,7 @@ function makeMatches(inner, outer, uneven, callback)
     for (let i = 0; i < timeSlotCount; i++)
     {
         timeSlots.push(timeOfDate)
-        addTime(timeOfDate, config.dateLenght, undefined, (error, result) =>
+        addTime(timeOfDate, lengthOfDate, undefined, (error, result) =>
         {
             timeOfDate = result
         })
@@ -60,16 +72,16 @@ function makeMatches(inner, outer, uneven, callback)
 
         inner.forEach(innerParticipant =>
         {
-            matches.push({ 
-                            person1: outerParticipant.username, 
-                            person2: innerParticipant.username, 
-                            gender1: outerParticipant.gender, 
-                            gender2: innerParticipant.gender, 
-                            email1: outerParticipant.email, 
-                            email2: innerParticipant.email, 
-                            time: timeSlots[ incrementer ], 
-                            link: links.links[ incrementer ] 
-                        })
+            matches.push({
+                person1: outerParticipant.username,
+                person2: innerParticipant.username,
+                gender1: outerParticipant.gender,
+                gender2: innerParticipant.gender,
+                email1: outerParticipant.email,
+                email2: innerParticipant.email,
+                time: timeSlots[ incrementer ],
+                link: links.links[ incrementer ]
+            })
             incrementer++
         })
 

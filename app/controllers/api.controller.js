@@ -18,8 +18,9 @@ module.exports =
                 const females = result.filter(participant => participant.gender == "female")
                 const males = result.filter(participant => participant.gender == "male")
 
-                matchMaker.getMatches(males, females, (dates) =>
+                matchMaker.getMatches(males, females, req.params.dateID, (err, dates) =>
                 {
+                    if (err) res.status(500).json({error: err.toString()})
                     mailer.sendMail(dates, result, req.params.dateID, res)
                 })
             }
