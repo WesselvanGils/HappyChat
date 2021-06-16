@@ -4,7 +4,7 @@
   "description": "A matchmaking tool made for HappySingles",
   "main": "roulette.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
