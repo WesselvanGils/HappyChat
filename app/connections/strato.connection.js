@@ -13,29 +13,6 @@ module.exports =
 {
     /* ----- All queries relating to participants ----- */
 
-    addParticipant: (userID, dateID, callback) =>
-    {
-        try
-        {
-            pool.getConnection((err, connection) =>
-            {
-                connection.query(`INSERT INTO participants VALUES ("${userID}", "${dateID}")`,
-                    (error, results, fields) =>
-                    {
-                        connection.release()
-
-                        if (error) callback(error, undefined)
-                        if (results) callback(undefined, results)
-                    }
-                )
-            })
-        }
-        catch (error)
-        {
-            callback(error, undefined)
-        }
-    },
-
     getParticipants: (dateID, callback) =>
     {
         try
@@ -68,29 +45,6 @@ module.exports =
             pool.getConnection((err, connection) =>
             {
                 connection.query(`SELECT dates.DateOfDate, dates.TimeOfDate FROM dates WHERE dateID = '1'`,
-                    (error, results, fields) =>
-                    {
-                        connection.release()
-
-                        if (error) callback(error, undefined)
-                        if (results) callback(undefined, results)
-                    }
-                )
-            })
-        }
-        catch (error)
-        {
-            callback(error, undefined)
-        }
-    },
-
-    addDates: (DateOfDate, TimeOfDate, TimeOfClosure, callback) =>
-    {
-        try
-        {
-            pool.getConnection((err, connection) =>
-            {
-                connection.query(`INSERT INTO dates VALUES ("${DateOfDate}", "${TimeOfDate}", "${TimeOfClosure}")`,
                     (error, results, fields) =>
                     {
                         connection.release()

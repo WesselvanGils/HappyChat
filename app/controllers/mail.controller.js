@@ -1,7 +1,6 @@
 const { config } = require("dotenv")
 const nodemailer = require("nodemailer")
 const database = require("../connections/strato.connection.js")
-const configo = require("../../data/config.json")
 require("dotenv").config()
 
 const transporter = nodemailer.createTransport({
