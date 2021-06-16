@@ -3,10 +3,10 @@ const pool = mySql.createPool(
     {
         connectionLimit: 10,
         multipleStatements: true,
-        host: "localhost" || DB_HOST,
-        user: "root" || DB_USER,
-        password: "" || DB_PASSWORD,
-        database: "strato"
+        host: DB_HOST,
+        user: DB_USER,
+        password: DB_PASSWORD,
+        database: DB_NAME
     }
 )
 
