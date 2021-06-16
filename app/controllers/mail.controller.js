@@ -23,20 +23,21 @@ module.exports =
             if (error) res.status(500).json({ error: error.toString() })
 
             let incrementer = 0
-            let schedule = []
 
             participants.forEach(participant =>
             {
+                let schedule = []
                 let text = "Bij deze het schema van je aankomende speeddate sessie op " + result[ 0 ].DateOfDate + "\n"
 
                 dates.forEach(date =>
                 {
                     let otherPerson = ''
+                    console.log(date)
 
                     if (participant.username == date.person1) otherPerson = date.person2
                     if (participant.username == date.person2) otherPerson = date.person1
 
-                    schedule.push(`\n ${participant.username} je date met ${otherPerson} is ingepland op ${date.TimeOfDate}! \n Doe mee via deze link: ${date.link} \n`)
+                    schedule.push(`\n ${participant.username} je date met ${otherPerson} is ingepland op ${date.time}! \n Doe mee via deze link: ${date.link} \n`)
                 })
 
                 schedule.forEach(string => 
