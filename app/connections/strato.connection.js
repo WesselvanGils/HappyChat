@@ -44,7 +44,7 @@ module.exports =
         {
             pool.getConnection((err, connection) =>
             {
-                connection.query(`SELECT dates.DateOfDate, dates.TimeOfDate FROM dates WHERE dateID = '1'`,
+                connection.query(`SELECT dates.DateOfDate, dates.TimeOfDate FROM dates WHERE dateID = "${dateID}"`,
                     (error, results, fields) =>
                     {
                         connection.release()
