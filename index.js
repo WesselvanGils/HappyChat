@@ -1,7 +1,7 @@
-const express = require("express")
-const app = express()
-const port = process.env.PORT || 3000
+const express = require("express");
+const app = express();
+const port = process.env.PORT || 3000;
 
-require("./app/routes/mail.route")(app)
+require("./app/routes/mail.route")(app);
 
-app.listen(port)
+app.listen(port);
