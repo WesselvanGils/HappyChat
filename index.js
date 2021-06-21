@@ -1,7 +1,7 @@
 const sqlDatabase = require("./data/database.connection.js")
 const database = require("./data/participants.json")
 const mailer = require("./src/mail.js")
-const matchMaker = require("./src/matchMaker")
+const matchMaker = require("./src/matchMaker.js")
 
 const participants = database.participants
 const females = participants.filter(participant => participant.gender == "female")
