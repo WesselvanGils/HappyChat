@@ -11,18 +11,22 @@
     <div class="flexbox-container">
         <div class="flexbox-item">
             <form action="#" name="personForm" class="login100-form">
-                <label for="fname">Username</label><br>
-                <input type="text" id="fname" name="fname"><br>
-                <label for="femail">Email Adress</label><br>
-                <input type="email" id="femail" name="femail"><br><br>
+                <label for="fname">Username</label class="login100-form-title"><br>
+                <input type="text" id="fname" name="fname" class="input100"><br>
+                <label for="femail">Email Adress</label class="login100-form-title"><br>
+                <input type="email" id="femail" name="femail" class="input100"><br><br>
                 <span>Gender</span><br>
-                <input type="radio" id="male" name="gender" value="male">
-                <label for="male">Male</label><br>
-                <input type="radio" id="female" name="gender" value="female">
-                <label for="female">Female</label>
+                <input type="radio" id="male" name="gender" value="male" class="input100">
+                <label for="male">Male</label class="login100-form-title"><br>
+                <input type="radio" id="female" name="gender" value="female" class="input100">
+                <label for="female">Female</label class="login100-form-title">
                 <br><br>
                 <input type="submit" id="submit-button" class="login100-form-btn">
             </form>
+
+            <br>
+
+            <button id="send-mails-button" class="login100-form-btn">Send Mails</button>
         </div>
         <div class="flexbox-item">
             <ul id="people-to-mail">

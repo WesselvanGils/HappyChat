@@ -3,13 +3,20 @@ const database = require("./data/participants.json")
 const mailer = require("./src/mail.js")
 const matchMaker = require("./src/matchMaker.js")
 
-const participants = database.participants
+const button = document.querySelector("#send-mails-button")
+const participants = document.getElementById("people-to-mail")
+
 const females = participants.filter(participant => participant.gender == "female")
 const males = participants.filter(participant => participant.gender == "male")
 
-matchMaker.getMatches(males, females, (result) =>
+button.addEventListener("click", function(e) 
 {
-    console.log(result) 
+    e.preventDefault()
+
+    matchMaker.getMatches(males, females, result =>
+    {
+        console.log(result)
+    })
 })
 
 function addToDatabase(dates, callback)
@@ -26,7 +33,10 @@ function addToDatabase(dates, callback)
             {
                 sqlDatabase.addMatch(date, (error, result) =>
                 {
-                    if (error) { console.log(error.sqlMessage) }
+                    if (error)
+                    {
+                        console.log(error.sqlMessage)
+                    }
 
                     //if (result) { console.log(result.affectedRows) }
 
