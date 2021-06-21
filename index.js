@@ -10,14 +10,6 @@ const males = participants.filter(participant => participant.gender == "male")
 matchMaker.getMatches(males, females, (result) =>
 {
     console.log(result) 
-    addToDatabase(result, (isDone) =>
-    {
-        if (isDone)
-        {
-            mailer.sendMail(participants)
-        }
-    })
-
 })
 
 function addToDatabase(dates, callback)
