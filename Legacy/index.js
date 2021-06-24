@@ -1,4 +1,7 @@
-const sqlDatabase = require("./data/database.connection.js")
+
+    
+requirejs(["./src/matchMaker.js", "./src/mailer.js"])
+require(["../../data/rooms.json"])
 const database = require("./data/participants.json")
 const mailer = require("./src/mail.js")
 const matchMaker = require("./src/matchMaker.js")
@@ -11,6 +14,7 @@ const males = participants.filter(participant => participant.gender == "male")
 
 button.addEventListener("click", function(e) 
 {
+    console.log("making matches?")
     e.preventDefault()
 
     matchMaker.getMatches(males, females, result =>

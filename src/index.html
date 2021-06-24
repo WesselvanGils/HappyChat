@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Happy Singles Mailer</title>
+		<link rel="stylesheet" href="index.css">
+
+		<script defer src="render.js"></script>
+	</head>
+	<body>
+
+		<h1> Happy Singles Mailer </h1>
+
+		<div class="flexbox-layout">
+			<div>
+				<form id="inputForm" action="" onsubmit="return false">
+					<label for="textUserName"> Username </label><br>
+					<input id="textUserName" name="textUserName" type="text"><br>
+					<label for="textEmail"> Email </label><br>
+					<input id="textEmail" type="email"><br>
+					<label for="gender"> Select Gender </label>
+					<br>
+					<input id="radioGenderMale" name="gender" type="radio" value="Male">Male
+					<br>
+					<input id="radioGenderFemale" name="gender" type="radio" value="Female">Female
+					<br>
+					<input id="addUserBtn" type="submit" value="Add User">
+					<br>
+				</form>
+
+				<hr>
+					
+				<form onsubmit="return false">
+					<label for="Date">Kies de datum van de date</label><br>
+					<input id="startDate" name="startDate" type="date"><br>
+					<label for="startTime">Kies de starttijd van de speeddate</label><br>
+					<input id="startTime" name="startTime "type="time"><br>
+					<input id="sendMailsBtn" type="submit" value="Send Mails!">
+				</form>
+			</div>
+
+			<div>
+				<ul id="participants">
+				</ul>
+			</div>
+		</div>
+
+	</body>
+</html>

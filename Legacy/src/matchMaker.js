@@ -1,6 +1,3 @@
-const links = require("../../data/rooms.json")
-const database = require("../connections/strato.connection.js")
-
 let outerLoop
 let innerLoop
 

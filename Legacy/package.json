@@ -1,0 +1,29 @@
+{
+  "name": "happychat",
+  "version": "1.0.0",
+  "description": "A matchmaking tool made for HappySingles",
+  "main": "roulette.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheElementalDragon/HappyChat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheElementalDragon/HappyChat/issues"
+  },
+  "homepage": "https://github.com/TheElementalDragon/HappyChat#readme",
+  "dependencies": {
+    "nodemailer": "^6.6.1",
+    "requirejs": "^2.3.6"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0",
+    "nodemon": "^2.0.7"
+  }
+}
