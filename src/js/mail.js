@@ -1,15 +1,14 @@
-require("dotenv").config()
 const nodemailer = require("nodemailer")
 
 const transporter = nodemailer.createTransport(
 {
-    host: process.env.HOST,
-    port: process.env.MAIL_PORT,
+    host: "smtp.strato.com",
+    port: 465,
     secure: true,
     auth:
     {
-        user: process.env.USER,
-        pass: process.env.PASSWORD
+        user: "happychat@happy-singles.nl",
+        pass: "!cL~6xSkfaasdnAs"
     }
 })
 
@@ -42,7 +41,7 @@ module.exports = {
                     })
 
                     let mailOptions = {
-                        from: process.env.USER,
+                        from: "happychat@happy-singles.nl",
                         to: result.recipient.email,
                         subject: "Jouw speeddate schema!",
                         text: text
@@ -52,7 +51,7 @@ module.exports = {
                     {
                         if (erry)
                         {
-                            console.log(erry.response)
+                            console.log(erry)
                         }
                         if (info)
                         {
