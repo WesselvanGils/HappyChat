@@ -12,3 +12,8 @@ body
 	flex-direction: row;
 	padding: 2rem;
 }
+
+.list
+{
+	padding-left: 10rem;
+}
