@@ -3,9 +3,6 @@ const mailer = require("./js/mail.js")
 
 const addUserBtn = document.getElementById("addUserBtn")
 const sendMailsBtn = document.getElementById("sendMailsBtn")
-const participants = document.getElementById("participants")
-const startDate = document.getElementById("startDate")
-const startTime = document.getElementById("startTime")
 
 const internalParticipants = []
 
@@ -14,6 +11,7 @@ sendMailsBtn.onclick = makeMatches
 
 function addUser()
 {
+    const participants = document.getElementById("participants")
     const userName = document.getElementById("textUserName").value
     const email = document.getElementById("textEmail").value
     const gender = checkButton().value
@@ -44,10 +42,12 @@ function makeMatches()
     const females = internalParticipants.filter(participant => participant.gender == "Female")
     const males = internalParticipants.filter(participant => participant.gender == "Male")
 
-    console.log(startDate.value, startTime.value)
+    const dateLenght = document.getElementById("dateLength")
+    const startDate = document.getElementById("startDate")
+    const startTime = document.getElementById("startTime")
 
-    matchMaker.getMatches(males, females, (error, result) =>
+    matchMaker.getMatches(males, females, startTime.value, dateLenght.value, (error, result) =>
     {
-        mailer.sendMails()
+        mailer.sendMails(internalParticipants, result, startDate)
     })
 }

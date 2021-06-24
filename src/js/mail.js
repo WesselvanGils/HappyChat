@@ -14,79 +14,102 @@ const transporter = nodemailer.createTransport(
 })
 
 module.exports = {
-    sendMails: participants =>
+    sendMails: (participants, dates, startDate) =>
     {
         let incrementer = 0
 
-        participants.forEach(participant =>
+        gatherInfo(participants, dates, (error, results) =>
         {
-            if (error)
+            if (results)
             {
-                console.log(error)
-            }
-
-            let schedule = []
-            let text =
-                "Bij deze het schema van je aankomende speeddate sessie op " +
-                configo.day +
-                "/" +
-                configo.month +
-                "/" +
-                configo.year +
-                "\n"
-
-            if (participant.gender == "male")
-            {
-                dates.forEach(date =>
+                results.forEach(result =>
                 {
-                    schedule.push(
-                        `\n ${date.person1} je date met ${date.person2} is ingepland op ${date.TimeOfDate}! \n Doe mee via deze link: ${date.Link} \n`
-                    )
+                    let schedule = []
+                    let text =
+                        `Bij deze het schema van je aankomende speeddate sessie op ${startDate.value}` +
+                        "\n"
+
+                    result.matches.forEach(match =>
+                    {
+                        schedule.push(
+                            `\n ${result.recipient.username} je date met ${match.otherPerson} is ingepland op ${match.timeOfDate}! \n Doe mee via deze link: ${match.link} \n`
+                        )
+                    })
+
+                    schedule.forEach(string =>
+                    {
+                        text = text + string + "\n"
+                    })
+
+                    let mailOptions = {
+                        from: process.env.USER,
+                        to: result.recipient.email,
+                        subject: "Jouw speeddate schema!",
+                        text: text
+                    }
+
+                    transporter.sendMail(mailOptions, function(erry, info)
+                    {
+                        if (erry)
+                        {
+                            console.log(erry.response)
+                        }
+                        if (info)
+                        {
+                            console.log("Email sent: " + info.response)
+                        }
+
+                        incrementer++
+                        console.log(schedule)
+
+                        if (incrementer + 1 >= participants.length)
+                        {
+                            console.log("all done")
+                        }
+                    })
                 })
             }
-
-            if (participant.gender == "female")
-            {
-                dates.forEach(date =>
-                {
-                    schedule.push(
-                        `\n ${date.person1} je date met ${date.person2} is ingepland op ${date.TimeOfDate}!\n Doe mee via deze link: ${date.Link} \n`
-                    )
-                })
-            }
-
-            schedule.forEach(string =>
-            {
-                text = text + string + "\n"
-            })
-
-            let mailOptions = {
-                from: process.env.USER,
-                to: result.Email,
-                subject: "Jouw speeddate schema!",
-                text: text
-            }
-
-            console.log(schedule)
-
-            // transporter.sendMail(mailOptions, function(erry, info)
-            // {
-            //     if (erry)
-            //     {
-            //         console.log(erry.response)
-            //     }
-            //     if (info)
-            //     {
-            //         console.log("Email sent: " + info.response)
-            //     }
-
-                incrementer++
-
-                if (incrementer + 1 >= participants.length)
-                {
-                    process.exit()
-                }
-            // })
         })
     }
+}
+
+function gatherInfo(participants, dates, callback)
+{
+    let relevantDates = []
+
+    participants.forEach(participant =>
+    {
+        let peopleToDate = []
+
+        dates.forEach(date =>
+        {
+            if (participant.email == date.email1)
+            {
+                peopleToDate.push(
+                {
+                    otherPerson: date.person2,
+                    timeOfDate: date.timeOfdate,
+                    link: date.link
+                })
+            }
+            else if (participant.email == date.email2)
+            {
+                peopleToDate.push(
+                {
+                    otherPerson: date.person1,
+                    timeOfDate: date.timeOfdate,
+                    link: date.link
+                })
+            }
+        })
+
+        relevantDates.push(
+        {
+            recipient: participant,
+            matches: peopleToDate
+        })
+    })
+
+    console.log(relevantDates)
+    callback(undefined, relevantDates)
 }

@@ -1,3 +1,5 @@
+const rooms = require("./rooms.json")
+
 let outerLoop
 let innerLoop
 
@@ -6,8 +8,11 @@ let timeOfDate = "00:00"
 
 module.exports = 
 {
-    getMatches(males, females, callback)
+    getMatches(males, females, startTime, dateLength, callback)
     {
+        timeOfDate = startTime.toString()
+        lengthOfDate = dateLength
+
         if (males.length == females.length)
         {
             makeMatches(males, females, false, dates =>
@@ -17,7 +22,7 @@ module.exports =
         }
         else
         {
-            if (males.length < females.length)
+            if (males.length > females.length)
             {
                 outerLoop = males
                 innerLoop = females
@@ -41,6 +46,7 @@ function makeMatches(inner, outer, uneven, callback)
     let matches = []
     let timeSlots = []
     let index = 0
+    let linkNmbr = 0
     let timeSlotCount
 
     if (uneven) timeSlotCount = inner.length * outer.length - (inner.length - outer.length)
@@ -69,6 +75,8 @@ function makeMatches(inner, outer, uneven, callback)
                 gender2: innerParticipant.gender,
                 email1: outerParticipant.email,
                 email2: innerParticipant.email,
+                timeOfdate: timeSlots[incrementer],
+                link: rooms.links[linkNmbr]
             })
             incrementer++
         })
@@ -82,6 +90,11 @@ function makeMatches(inner, outer, uneven, callback)
         }
 
         index++
+        linkNmbr = index
+        if (linkNmbr > rooms.links.length)
+        {
+            linkNmbr = 0
+        }
     })
 }
 
